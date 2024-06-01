@@ -84,8 +84,6 @@ const characterStats = (state = initialState, action) => {
     case 'GET_LOOT':
       if (state.inventory.hasOwnProperty(action.id)) {
         let summedAmount = state.inventory[action.id] + action.amount
-        console.log(state.inventory)
-        console.log(summedAmount)
         return {
           ...state,
           inventory: {

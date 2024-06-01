@@ -18,8 +18,6 @@ const CharacterCreation = ({ getStatPage }) => {
   const characterStats = useSelector((state) => state.characterStats)
   const dispatch = useDispatch()
 
-  console.log(characterName)
-
   const saveStats = (name) => {
     dispatch(saveCharacter(name))
   }

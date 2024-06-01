@@ -14,10 +14,18 @@
   border-bottom: 5px solid rgba(31, 161, 90, 1);
 }
 
-.top-bar__close-btn {
+.top-bar__close-button {
   float: right;
   height: 100%;
   width: 50px;
+  font-size: 18px;
+  border: none;
+  border-left: 5px solid rgb(31, 161, 90);
+  background-color: rgba(34, 150, 86, 0.7);
+}
+
+.point-description__text {
+  font-size: 24px;
 }
 
 .point-description {
@@ -36,6 +44,7 @@
 }
 
 .point-description__buttons {
+  margin-top: 12px;
   width: 80%;
   button {
     width: 100%;
@@ -46,8 +55,10 @@
     background-color: rgb(42, 184, 106);
     border: 2px solid rgb(34, 150, 86);
     padding-right: 10px;
-    font-family: "Monofonto";
+    font-family: 'Monofonto';
+    font-size: 24px;
     margin-bottom: 5px;
+    cursor: pointer;
     &:active {
       background-color: rgb(34, 150, 86);
     }

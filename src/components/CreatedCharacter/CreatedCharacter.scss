@@ -1,7 +1,15 @@
 .character {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.created-character__loading-wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

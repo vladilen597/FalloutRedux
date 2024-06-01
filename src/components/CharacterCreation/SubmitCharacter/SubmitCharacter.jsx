@@ -13,14 +13,14 @@ export const SubmitCharacter = ({ saveName, alertUncompleted }) => {
         className='submit-character'
         onClick={() => alertUncompleted(stats.special.remainingPoints)}
       >
-        SAVE CHARACTER
+        CREATE CHARACTER
       </button>
     )
   } else {
     return (
       <Link to='/character'>
         <button className='submit-character' onClick={saveName}>
-          SAVE CHARACTER
+          CREATE CHARACTER
         </button>
       </Link>
     )

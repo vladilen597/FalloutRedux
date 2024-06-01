@@ -1,36 +1,38 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CharacterCreation from "./CharacterCreation/CharacterCreation.jsx";
-import CreatedCharacter from "./CreatedCharacter/CreatedCharacter.jsx";
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import CharacterCreation from './CharacterCreation/CharacterCreation.jsx'
+import CreatedCharacter from './CreatedCharacter/CreatedCharacter.jsx'
 
-import "./App.scss";
-import "./reset.css"
+import './App.scss'
+import './reset.css'
+import ThreejsVersion from './ThreejsVersion/ThreejsVersion.jsx'
 
 const PageNotFound = () => {
-  return <div>404</div>;
-};
+  return <div>404</div>
+}
 
 const App = () => {
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(0)
 
   const getStatPage = (id) => {
-    setId(id);
-  };
+    setId(id)
+  }
 
   return (
-    <div className="app">
+    <div className='app'>
       <Router>
         <Switch>
           <Route
             exact
-            path="/"
+            path='/'
             render={() => <CharacterCreation getStatPage={getStatPage} />}
           />
-          <Route exact path="/character" component={CreatedCharacter} />
+          <Route exact path='/game' component={CreatedCharacter} />
+          <Route exact path='/three-game' component={ThreejsVersion} />
         </Switch>
       </Router>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

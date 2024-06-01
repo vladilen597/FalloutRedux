@@ -1,13 +1,13 @@
-import React from "react";
-import { render } from "react-dom";
-import { Provider } from "react-redux";
-import App from "./components/App.jsx";
-import store from "./store/store";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react'
+import { Provider } from 'react-redux'
+import App from './components/App.jsx'
+import store from './store/store'
+import { createRoot } from 'react-dom/client'
 
-render(
+const root = createRoot(document.getElementById('root'))
+
+root.render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById("root")
-);
+  </Provider>
+)

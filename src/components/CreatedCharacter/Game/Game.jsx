@@ -1,56 +1,56 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { connect } from "react-redux";
-import setOver from "../../../store/actions/setOver.jsx";
-import unsetOver from "../../../store/actions/unsetOver.jsx";
-import loadGame from "../../../store/actions/loadGame.jsx";
-import head from "../../../pics/head.png";
-import find from "../../../pics/searchicon.png";
+import React, { useEffect, useMemo, useState } from 'react'
+import { connect } from 'react-redux'
+import setOver from '../../../store/actions/setOver.jsx'
+import unsetOver from '../../../store/actions/unsetOver.jsx'
+import loadGame from '../../../store/actions/loadGame.jsx'
+import head from '../../../pics/head.png'
+import find from '../../../pics/searchicon.png'
 
-import "./Game.scss";
-import PopupWindow from "./PopupWindow/PopupWindow.jsx";
-import Pipboy from "./Pipboy/Pipboy.jsx";
-import RandomEncounter from "./RandomEncounter/RandomEncounter.jsx";
-import { pipboy } from "../../../constants/imageImports.jsx";
+import './Game.scss'
+import PopupWindow from './PopupWindow/PopupWindow.jsx'
+import Pipboy from './Pipboy/Pipboy.jsx'
+import RandomEncounter from './RandomEncounter/RandomEncounter.jsx'
+import { pipboy } from '../../../constants/imageImports.jsx'
 
 const Game = React.memo(({ state, setOver, unsetOver, loadGame }) => {
-  const [positionX, setPositionX] = useState(130);
-  const [positionY, setPositionY] = useState(-15);
-  const [investigateIsShown, setinvestigateIsShown] = useState(false);
-  const [inventoryIsShown, setinventoryIsShown] = useState(false);
-  const [randomEncounter, setRandomEncounter] = useState(false);
+  const [positionX, setPositionX] = useState(130)
+  const [positionY, setPositionY] = useState(-15)
+  const [investigateIsShown, setinvestigateIsShown] = useState(false)
+  const [inventoryIsShown, setinventoryIsShown] = useState(false)
+  const [randomEncounter, setRandomEncounter] = useState(false)
 
   useEffect(() => {
     if (localStorage.length >= 2) {
-      setPositionX(JSON.parse(localStorage.getItem("x")));
-      setPositionY(JSON.parse(localStorage.getItem("y")));
+      setPositionX(JSON.parse(localStorage.getItem('x')))
+      setPositionY(JSON.parse(localStorage.getItem('y')))
     } else {
-      localStorage.setItem("x", positionX);
-      localStorage.setItem("y", positionY);
+      localStorage.setItem('x', positionX)
+      localStorage.setItem('y', positionY)
     }
 
-    loadGame();
-  }, []);
+    loadGame()
+  }, [])
 
   useEffect(() => {
-    localStorage.setItem("x", positionX);
-    localStorage.setItem("y", positionY);
+    localStorage.setItem('x', positionX)
+    localStorage.setItem('y', positionY)
     if (
       state.quests[0].x - 830 < positionX &&
       state.quests[0].x - 760 > positionX &&
       (state.quests[0].y - 525) * -1 > positionY &&
       (state.quests[0].y - 470) * -1 < positionY
     ) {
-      setOver();
+      setOver()
     } else {
-      unsetOver();
+      unsetOver()
     }
 
-    const randomNumber = Math.round((Math.random() * 100).toFixed(2));
+    const randomNumber = Math.round((Math.random() * 100).toFixed(2))
 
     if (randomNumber === 5) {
-      setRandomEncounter(true);
+      setRandomEncounter(true)
     }
-  }, [positionX, positionY]);
+  }, [positionX, positionY])
 
   const moveCharacter = (e) => {
     if (
@@ -59,65 +59,62 @@ const Game = React.memo(({ state, setOver, unsetOver, loadGame }) => {
       randomEncounter == false
     ) {
       if (e.keyCode === 39 || e.keyCode === 68) {
-        setPositionX((prevState) => prevState - 15);
+        setPositionX((prevState) => prevState - 15)
       }
       if (e.keyCode === 37 || e.keyCode === 65) {
-        setPositionX((prevState) => prevState + 15);
+        setPositionX((prevState) => prevState + 15)
       }
       if (e.keyCode === 40 || e.keyCode === 83) {
-        setPositionY((prevState) => prevState - 15);
+        setPositionY((prevState) => prevState - 15)
       }
       if (e.keyCode === 38 || e.keyCode === 87) {
-        setPositionY((prevState) => prevState + 15);
+        setPositionY((prevState) => prevState + 15)
       }
     }
-  };
+  }
 
   const toggleInventory = () => {
-    setinventoryIsShown((prevState) => (prevState = !prevState));
-  };
+    setinventoryIsShown((prevState) => (prevState = !prevState))
+  }
 
   const toggleRandomEncounter = () => {
-    setRandomEncounter(false);
-  };
+    setRandomEncounter(false)
+  }
 
-  const moveCharacterMemo = useMemo(
-    () => moveCharacter,
-    [positionX, positionY]
-  );
+  const moveCharacterMemo = useMemo(() => moveCharacter, [positionX, positionY])
 
-  const blankFunction = () => {};
+  const blankFunction = () => {}
 
   const toggleWindow = () => {
-    setinvestigateIsShown((prevState) => (prevState = !prevState));
+    setinvestigateIsShown((prevState) => (prevState = !prevState))
     if (!investigateIsShown) {
-      unsetOver();
+      unsetOver()
     } else {
-      setOver();
+      setOver()
     }
-  };
+  }
 
   return (
     <main
-      className="your-character"
+      className='your-character'
       onKeyDown={
         investigateIsShown || inventoryIsShown || randomEncounter
           ? blankFunction
           : moveCharacterMemo
       }
-      tabIndex="0"
+      tabIndex='0'
       style={{
-        backgroundPositionX: positionX + "px",
-        backgroundPositionY: positionY + "px",
+        backgroundPositionX: positionX + 'px',
+        backgroundPositionY: positionY + 'px',
       }}
     >
       <div
-        className="pipboy-button"
+        className='pipboy-button'
         onClick={toggleInventory}
         style={
           inventoryIsShown || investigateIsShown || randomEncounter
-            ? { display: "none" }
-            : { display: "block" }
+            ? { display: 'none' }
+            : { display: 'block' }
         }
       >
         <img src={pipboy} />
@@ -132,27 +129,27 @@ const Game = React.memo(({ state, setOver, unsetOver, loadGame }) => {
       )}
       <img
         src={head}
-        className="head"
+        className='head'
         style={{
-          width: "30px",
+          width: '30px',
         }}
       />
       <img
-        className="point"
+        className='point'
         src={find}
         style={{
-          left: state.quests[0].x + positionX + "px",
-          top: state.quests[0].y + positionY + "px",
+          left: state.quests[0].x + positionX + 'px',
+          top: state.quests[0].y + positionY + 'px',
         }}
       />
       {state.isOver ? (
         <button
-          className="investigate-button"
+          className='investigate-button'
           onClick={toggleWindow}
           style={
             inventoryIsShown || randomEncounter
-              ? { display: "none" }
-              : { display: "block" }
+              ? { display: 'none' }
+              : { display: 'block' }
           }
         >
           INVESTIGATE
@@ -170,27 +167,27 @@ const Game = React.memo(({ state, setOver, unsetOver, loadGame }) => {
         <></>
       )}
     </main>
-  );
-});
+  )
+})
 
 const mapStateToProps = (state) => {
   return {
     state: state.characterStats,
-  };
-};
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setOver: () => {
-      dispatch(setOver());
+      dispatch(setOver())
     },
     unsetOver: () => {
-      dispatch(unsetOver());
+      dispatch(unsetOver())
     },
     loadGame: () => {
-      dispatch(loadGame());
+      dispatch(loadGame())
     },
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game)

@@ -5,7 +5,6 @@ import './Inventory.scss'
 
 const Inventory = () => {
   const inventory = useSelector((state) => state.characterStats.inventory)
-  console.log(inventory)
 
   return (
     <main className='inventory'>

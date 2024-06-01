@@ -10,7 +10,6 @@ import './Stats.scss'
 const Stats = ({ injuries }) => {
   const characterStats = useSelector((state) => state.characterStats)
 
-  console.log(characterStats)
   const health = 100 + 10 * characterStats.special.strength
 
   return (
